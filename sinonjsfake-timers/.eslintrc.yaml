@@ -1,0 +1,13 @@
+extends:
+  - "@sinonjs/eslint-config"
+  - "plugin:prettier/recommended"
+
+overrides:
+  - files: "**/*-test.js"
+    plugins:
+      - mocha
+    env:
+      mocha: true
+    rules:
+      max-nested-callbacks: off
+      mocha/no-exclusive-tests: error

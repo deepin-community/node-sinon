@@ -1,0 +1,265 @@
+node-sinon (12.0.1+ds+~cs67.21.20-1) unstable; urgency=medium
+
+  * Team upload
+  * New upstream version 12.0.1+ds+~cs67.21.20, updates:
+    + sinon 12.0.1
+    + just-extend 5.1.1
+    + @sinonjs/fake-timers 8.1.0
+
+ -- Yadd <yadd@debian.org>  Mon, 08 Nov 2021 18:06:33 +0100
+
+node-sinon (11.1.2+ds+~cs67.19.20-1) unstable; urgency=medium
+
+  * Team upload
+
+  [ Debian Janitor ]
+  * Remove constraints unnecessary since buster
+
+  [ Yadd ]
+  * Fix GitHub tags regex
+  * Declare compliance with policy 4.6.0
+  * Fix filenamemangle
+  * New upstream version 11.1.2+ds+~cs67.19.20
+  * Enable all test
+  * Update lintian overrides
+
+ -- Yadd <yadd@debian.org>  Thu, 28 Oct 2021 06:11:00 +0200
+
+node-sinon (9.2.4+ds+~cs58.20.26-1) unstable; urgency=medium
+
+  * Team upload
+  * New upstream version 9.2.4+ds+~cs58.20.26
+    Updates:
+    + sinon 9.2.4
+    + @sinonjs/commons 1.8.2
+    + @sinonjs/fake-timer 7.0.2
+    + @sinonjs/formation 6.0.0
+    + @sinonjs/referee-sinon 8.0.1
+    + @sinonjs/samsam 5.3.1
+  * Update copyright
+
+ -- Xavier Guimard <yadd@debian.org>  Tue, 26 Jan 2021 15:47:09 +0100
+
+node-sinon (9.2.2+ds+~cs56.20.22-1) unstable; urgency=medium
+
+  * Team upload
+  * New upstream version 9.2.2+ds+~cs56.20.22
+    Updates:
+    + sinon 9.2.2
+    + @sinonjs/referee-sinon 8.0.0
+    + @sinonjs/referee 7.0.0
+    + @sinonjs/samsam 5.3.0
+    + @types/sinon 9.0.9
+  * Refresh patches
+  * Update dependencies:
+    + remove nodejs, node-lodash, node-lolex, node-samsam
+    + add node-event-emitter, node-is-object, node-merge-descriptors,
+      node-resolve, node-util
+
+ -- Xavier Guimard <yadd@debian.org>  Tue, 15 Dec 2020 13:21:00 +0100
+
+node-sinon (9.2.0+ds+~cs54.23.21-2) unstable; urgency=medium
+
+  * Team upload
+  * Declare compliance with policy 4.5.1
+  * Add ctype=nodejs to component(s)
+  * Remove useless dependency to formatio
+
+ -- Xavier Guimard <yadd@debian.org>  Mon, 07 Dec 2020 10:34:11 +0100
+
+node-sinon (9.2.0+ds+~cs54.23.21-1) unstable; urgency=medium
+
+  * Team upload
+  * Embed component @types/sinonjs__fake-timers
+  * New upstream version 9.2.0+ds+~cs54.23.21
+    Really 9.2.0+~1.8.1+~5.0.1+~5.2.0+~0.7.1+~4.0.4+~4.1.1+~1.1.2+~6.1.0
+           +~7.3.0+~6.0.1+~9.0.8+~6.0.2
+  * Install @types/sinonjs__fake-timers
+
+ -- Xavier Guimard <yadd@debian.org>  Sun, 18 Oct 2020 22:08:24 +0200
+
+node-sinon (9.2.0+ds+~cs48.23.19-1) unstable; urgency=medium
+
+  * Team upload
+  * New upstream version 9.2.0+ds+~cs48.23.19 (fixes debci)
+    Updates:
+     + sinon 9.2.0
+     + @sinonjs/referee-sinon 7.3.0
+     + @sinonjs/samsam 5.2.0
+     really 9.2.0+~1.8.1+~5.0.1+~5.2.0+~0.7.1+~4.0.4+~4.1.1+~1.1.2+~6.1.0
+            +~7.3.0+~6.0.1+~9.0.8
+  * Enable @sinonjs/* tests during build, this embeds some little modules
+  * Add node-jsdom and node-jquery in build dependencies (!nocheck)
+
+ -- Xavier Guimard <yadd@debian.org>  Mon, 12 Oct 2020 18:16:01 +0200
+
+node-sinon (9.1.0+ds+~cs48.21.19-1) unstable; urgency=medium
+
+  * Team upload
+  * Use dh-sequence-nodejs
+  * New upstream version 9.1.0+ds+~cs48.21.19
+    Updates:
+     + sinon 9.1.0
+     + @sinonjs/referee-sinon 7.2.0
+     + @sinonjs/referee 6.1.0
+     + @types/sinon 9.0.8
+    really: 9.1.0+~1.8.1+~5.0.1+~5.1.0+~0.7.1+~4.0.4+~4.1.1+~1.1.2+~6.1.0
+            +~7.2.0+~6.0.1+~9.0.8
+
+ -- Xavier Guimard <yadd@debian.org>  Mon, 05 Oct 2020 18:12:16 +0200
+
+node-sinon (9.0.3+ds+~cs48.19.16-2) unstable; urgency=medium
+
+  * Team upload
+  * Add a Breaks againt node-typescript-types < 20200907-1~
+
+ -- Xavier Guimard <yadd@debian.org>  Mon, 07 Sep 2020 01:50:37 +0200
+
+node-sinon (9.0.3+ds+~cs48.19.16-1) unstable; urgency=medium
+
+  * Team upload
+
+  [ Debian Janitor ]
+  * Set upstream metadata fields: Bug-Submit.
+
+  [ Xavier Guimard ]
+  * Use uscan checksum
+  * New upstream version 9.0.3+ds+~cs48.19.16
+    + Add typescript definitions (Closes: #968970)
+    + Updates:
+      - sinon 9.0.3
+      - @sinonjs/commons 1.8.1
+      - @sinonjs/fake-timers 6.0.1
+      - @sinonjs/referee-sinon 7.1.0
+      - @sinonjs/samsam 5.1.0
+    really: 9.0.3+~1.8.1+~5.0.1+~5.1.0+~0.7.1+~4.0.4+~4.1.0+~1.1.2+~6.0.1
+            +~7.1.0+~6.0.1+~9.0.5
+  * Update copyright
+  * Bump debhelper compatibility level to 13
+
+ -- Xavier Guimard <yadd@debian.org>  Thu, 03 Sep 2020 13:19:13 +0200
+
+node-sinon (9.0.1+ds-1) unstable; urgency=medium
+
+  * Team upload
+  * New upstream version 9.0.1+ds
+
+ -- Xavier Guimard <yadd@debian.org>  Wed, 11 Mar 2020 06:27:55 +0100
+
+node-sinon (9.0.0+ds-2) unstable; urgency=medium
+
+  * Team upload
+  * Back to unstable after successful tests
+  * Update lintian overrides
+  * Requires nodejs ≥ 10
+
+ -- Xavier Guimard <yadd@debian.org>  Sat, 07 Mar 2020 08:42:10 +0100
+
+node-sinon (9.0.0+ds-1) experimental; urgency=medium
+
+  * Team upload
+  * Declare compliance with policy 4.5.0
+  * Add "Provides: ${nodejs:Provides}
+  * New upstream version 9.0.0+ds
+  * Embed component: @sinonjs/fake-timers
+  * Disable one failing test (reported)
+  * Update copyright
+
+ -- Xavier Guimard <yadd@debian.org>  Fri, 21 Feb 2020 15:07:24 +0100
+
+node-sinon (8.1.0+ds-2) unstable; urgency=medium
+
+  * Team upload
+  * Declare compliance with policy 4.5.0
+  * Fix after hook for recent mocha (Closes: #952224)
+  * Update lintian overrides
+  * Add "Provides: ${nodejs:Provides}"
+  * Require pkg-js-tools 0.9.28~
+
+ -- Xavier Guimard <yadd@debian.org>  Mon, 24 Feb 2020 10:20:58 +0100
+
+node-sinon (8.1.0+ds-1) unstable; urgency=medium
+
+  * Team upload
+  * New upstream version 8.1.0+ds
+
+ -- Xavier Guimard <yadd@debian.org>  Mon, 20 Jan 2020 18:49:19 +0100
+
+node-sinon (8.0.4+ds-1) unstable; urgency=medium
+
+  * Team upload
+  * New upstream version 8.0.4+ds
+
+ -- Xavier Guimard <yadd@debian.org>  Thu, 09 Jan 2020 18:55:00 +0100
+
+node-sinon (8.0.2+ds-1) unstable; urgency=medium
+
+  * Team upload
+  * Add repacksuffix (doc ignored)
+  * New upstream version 8.0.2
+
+ -- Xavier Guimard <yadd@debian.org>  Fri, 03 Jan 2020 08:40:13 +0100
+
+node-sinon (8.0.1-2) unstable; urgency=medium
+
+  * Team upload
+  * Back to unstable after successful tests
+  * Update doc
+  * Update Breaks field
+
+ -- Xavier Guimard <yadd@debian.org>  Thu, 26 Dec 2019 08:40:47 +0100
+
+node-sinon (8.0.1-1) experimental; urgency=medium
+
+  * Team upload
+  * New upstream version 8.0.1
+  * Require node-lolex ≥ 5.1.2
+
+ -- Xavier Guimard <yadd@debian.org>  Wed, 25 Dec 2019 18:22:27 +0100
+
+node-sinon (7.5.0-2) unstable; urgency=medium
+
+  * Team upload
+  * Add "Breaks:" against node-coveralls and node-log-driver
+
+ -- Xavier Guimard <yadd@debian.org>  Wed, 04 Dec 2019 20:41:29 +0100
+
+node-sinon (7.5.0-1) unstable; urgency=medium
+
+  * Team upload
+  * Fix node-lolex dependency version
+  * Back to unstable after successful tests
+  * New upstream version 7.5.0
+  * Declare compliance with policy 4.4.1
+  * Add "Rules-Requires-Root: no"
+
+ -- Xavier Guimard <yadd@debian.org>  Tue, 19 Nov 2019 06:35:34 +0100
+
+node-sinon (7.4.2-1) experimental; urgency=medium
+
+  * Team upload
+  * Bump debhelper compatibility level to 12
+  * Declare compliance with policy 4.4.0
+  * Change section to javascript
+  * Add debian/gbp.conf
+  * Add upstream/metadata
+  * Embed all sinonjs components
+  * Embed components: bane, just-extend
+  * Exclude doc from import
+  * New upstream version 7.4.2
+  * Switch install to pkg-js-tools
+  * Update dependencies:
+    - add node-array-from, node-diff, node-lodash, node-lodash-packages,
+          node-object-assign, node-path-to-regexp, node-supports-color,
+          node-type-detect
+  * Enable upstream test
+  * Hide lintian false positive
+  * Update VCS fields to salsa
+
+ -- Xavier Guimard <yadd@debian.org>  Tue, 17 Sep 2019 11:10:24 +0200
+
+node-sinon (1.17.6-1) unstable; urgency=low
+
+  * Initial release (Closes: #840604)
+
+ -- Sruthi Chandran <srud@disroot.org>  Thu, 13 Oct 2016 12:50:43 +0530

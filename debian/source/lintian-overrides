@@ -1,0 +1,5 @@
+# False positive: data
+source-is-missing sinonjstext-encoding/lib/encoding-indexes.js
+source-contains-prebuilt-javascript-object sinonjstext-encoding/lib/encoding-indexes.js
+very-long-line-length-in-source-file sinonjsfake-timers/LICENSE line *
+very-long-line-length-in-source-file sinonjstext-encoding/lib/encoding-indexes.js line *

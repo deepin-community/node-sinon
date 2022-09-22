@@ -1,0 +1,80 @@
+version=4
+opts=\
+dversionmangle=s/\+(debian|dfsg|ds|deb)(\.\d+)?$//,\
+repacksuffix=+ds,\
+filenamemangle=s/.*?(\d[\d\.-]*@ARCHIVE_EXT@)/node-sinon-$1/ \
+ https://github.com/cjohansen/Sinon.JS/tags .*/archive/.*/v?([\d\.]+).tar.gz group
+
+# It is not recommended use npmregistry. Please investigate more.
+# Take a look at https://wiki.debian.org/debian/watch/
+opts="searchmode=plain,ctype=nodejs,component=sinonjscommons,pgpmode=none" \
+ https://registry.npmjs.org/@sinonjs/commons https://registry.npmjs.org/@sinonjs/commons/-/commons-([\d\.]+)@ARCHIVE_EXT@ checksum
+
+opts=\
+ctype=nodejs,\
+component=sinonjsformatio,\
+dversionmangle=auto,\
+filenamemangle=s/.*?(\d[\d\.-]*@ARCHIVE_EXT@)/node-sinonjs-formatio-$1/ \
+ https://github.com/sinonjs/formatio/tags .*/archive/.*/v?([\d\.]+).tar.gz checksum
+
+opts=\
+ctype=nodejs,\
+component=sinonjssamsam,\
+dversionmangle=auto,\
+filenamemangle=s/.*?(\d[\d\.-]*@ARCHIVE_EXT@)/node-sinonjs-samsam-$1/ \
+ https://github.com/sinonjs/samsam/tags .*/archive/.*/v?([\d\.]+).tar.gz checksum
+
+# It is not recommended use npmregistry. Please investigate more.
+# Take a look at https://wiki.debian.org/debian/watch/
+opts="searchmode=plain,ctype=nodejs,component=sinonjstext-encoding,pgpmode=none" \
+ https://registry.npmjs.org/@sinonjs/text-encoding https://registry.npmjs.org/@sinonjs/text-encoding/-/text-encoding-([\d\.]+)@ARCHIVE_EXT@ checksum
+
+opts=\
+ctype=nodejs,\
+component=nise,\
+dversionmangle=auto,\
+filenamemangle=s/.*?(\d[\d\.-]*@ARCHIVE_EXT@)/node-nise-$1/ \
+ https://github.com/sinonjs/nise/tags .*/archive/.*/v?([\d\.]+).tar.gz checksum
+
+# It is not recommended use npmregistry. Please investigate more.
+# Take a look at https://wiki.debian.org/debian/watch/
+opts="searchmode=plain,ctype=nodejs,component=just-extend,pgpmode=none" \
+ https://registry.npmjs.org/just-extend https://registry.npmjs.org/just-extend/-/just-extend-([\d\.]+)@ARCHIVE_EXT@ checksum
+
+opts=\
+ctype=nodejs,\
+component=bane,\
+dversionmangle=auto,\
+filenamemangle=s/.*?(\d[\d\.-]*@ARCHIVE_EXT@)/node-bane-$1/ \
+ https://github.com/busterjs/bane/tags .*/archive/.*/v?([\d\.]+).tar.gz checksum
+
+opts=\
+ctype=nodejs,\
+component=sinonjsreferee,\
+dversionmangle=auto,\
+filenamemangle=s/.*?(\d[\d\.-]*@ARCHIVE_EXT@)/node-sinonjs-referee-$1/ \
+ https://github.com/sinonjs/referee/tags .*/archive/.*/v?([\d\.]+).tar.gz checksum
+
+opts=\
+ctype=nodejs,\
+component=sinonjsreferee-sinon,\
+dversionmangle=auto,\
+filenamemangle=s/.*?(\d[\d\.-]*@ARCHIVE_EXT@)/node-sinonjs-referee-sinon-$1/ \
+ https://github.com/sinonjs/referee-sinon/tags .*/archive/.*/v?([\d\.]+).tar.gz checksum
+
+opts=\
+ctype=nodejs,\
+component=sinonjsfake-timers,\
+dversionmangle=auto,\
+filenamemangle=s/.*?(\d[\d\.-]*@ARCHIVE_EXT@)/node-fake-timers-$1/ \
+ https://github.com/sinonjs/fake-timers/tags .*/archive/.*/v?([\d\.]+).tar.gz checksum
+
+# It is not recommended use npmregistry. Please investigate more.
+# Take a look at https://wiki.debian.org/debian/watch/
+opts="searchmode=plain,ctype=nodejs,component=typessinon,pgpmode=none" \
+ https://registry.npmjs.org/@types/sinon https://registry.npmjs.org/@types/sinon/-/sinon-([\d\.]+)@ARCHIVE_EXT@ checksum
+
+# It is not recommended use npmregistry. Please investigate more.
+# Take a look at https://wiki.debian.org/debian/watch/
+opts="searchmode=plain,ctype=nodejs,component=typessinonjs-fake-timers,pgpmode=none" \
+ https://registry.npmjs.org/@types/sinonjs__fake-timers https://registry.npmjs.org/@types/sinonjs__fake-timers/-/sinonjs__fake-timers-([\d\.]+)@ARCHIVE_EXT@ checksum

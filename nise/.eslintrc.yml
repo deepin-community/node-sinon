@@ -1,0 +1,11 @@
+extends:
+    - "@sinonjs/eslint-config"
+
+globals:
+    ArrayBuffer: false
+    Uint8Array: false
+
+overrides:
+    - files: "*.test.*"
+      rules:
+          max-nested-callbacks: off

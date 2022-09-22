@@ -1,0 +1,53 @@
+Source: node-sinon
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Uploaders: Sruthi Chandran <srud@disroot.org>
+Section: javascript
+Testsuite: autopkgtest-pkg-nodejs
+Priority: optional
+Build-Depends:
+ debhelper-compat (= 13)
+ , mocha <!nocheck>
+ , node-array-from <!nocheck>
+ , node-diff <!nocheck>
+ , node-event-emitter <!nocheck>
+ , node-is-object <!nocheck>
+ , node-jsdom <!nocheck>
+ , node-jquery <!nocheck>
+ , node-lodash-packages <!nocheck>
+ , node-merge-descriptors <!nocheck>
+ , node-object-assign <!nocheck>
+ , node-path-to-regexp <!nocheck>
+ , node-resolve <!nocheck>
+ , node-supports-color <!nocheck>
+ , node-type-detect <!nocheck>
+ , node-util <!nocheck>
+ , dh-sequence-nodejs
+Standards-Version: 4.6.0
+Vcs-Browser: https://salsa.debian.org/js-team/node-sinon
+Vcs-Git: https://salsa.debian.org/js-team/node-sinon.git
+Homepage: https://sinonjs.org/
+Rules-Requires-Root: no
+
+Package: node-sinon
+Architecture: all
+Depends:
+ ${misc:Depends}
+ , node-array-from
+ , node-diff
+ , node-event-emitter
+ , node-is-object
+ , node-lodash-packages
+ , node-merge-descriptors
+ , node-object-assign
+ , node-path-to-regexp
+ , node-resolve
+ , node-supports-color
+ , node-type-detect
+ , node-util
+Provides: ${nodejs:Provides}
+Breaks:
+ node-log-driver (<< 1.2.7+git+20180219+bba1761737-7)
+ , node-coveralls (<< 3.0.9-2)
+ , node-typescript-types (<< 20200907-1~)
+Description: JavaScript test spies, stubs and mocks
+ Standalone and test framework agnostic JavaScript test spies, stubs and mocks.
