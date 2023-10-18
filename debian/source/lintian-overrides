@@ -1,5 +1,14 @@
 # False positive: data
-source-is-missing sinonjstext-encoding/lib/encoding-indexes.js
-source-contains-prebuilt-javascript-object sinonjstext-encoding/lib/encoding-indexes.js
-very-long-line-length-in-source-file sinonjsfake-timers/LICENSE line *
-very-long-line-length-in-source-file sinonjstext-encoding/lib/encoding-indexes.js line *
+source-is-missing [*sinonjstext-encoding/lib/encoding-indexes.js*]
+source-contains-prebuilt-javascript-object [*sinonjstext-encoding/lib/encoding-indexes.js*]
+very-long-line-length-in-source-file *sinonjsfake-timers/LICENSE*
+very-long-line-length-in-source-file *sinonjstext-encoding/lib/encoding-indexes.js*
+very-long-line-length-in-source-file *.md*
+# Same author
+add-component-copyright nise *
+add-component-copyright sinonjscommons *
+add-component-copyright sinonjsfake-timers *
+add-component-copyright sinonjsformatio *
+add-component-copyright sinonjsreferee *
+add-component-copyright sinonjsreferee-sinon *
+add-component-copyright sinonjssamsam *

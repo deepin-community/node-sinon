@@ -9,6 +9,7 @@ Files-Excluded: docs
 Files: *
 Copyright: 2010-2017, Christian Johansen <christian@cjohansen.no>
  2018, Sinon.JS
+ 2010-2014, August Lilleaas <august.lilleaas@gmail.com.>
 License: BSD-3-Clause
 
 Files: bane/*
@@ -31,13 +32,8 @@ License: Expat
 
 Files: debian/*
 Copyright: 2016, Sruthi Chandran <srud@disroot.org>
- 2019-2021, Yadd <yadd@debian.org>
+ 2019-2022, Yadd <yadd@debian.org>
 License: BSD-3-Clause
-
-Files: debian/tests/test_modules/fill-keys/*
- debian/tests/test_modules/module-not-found-error/*
-Copyright: Ben Drucker <bvdrucker@gmail.com>
-License: Expat
 
 Files: debian/tests/test_modules/jsverify/*
  debian/tests/test_modules/lazy-seq/*
@@ -53,11 +49,6 @@ License: Apache-2.0
 
 Files: debian/tests/test_modules/native-promise-only/*
 Copyright: Kyle Simpson
-License: Expat
-
-Files: debian/tests/test_modules/proxyquire/*
-Copyright: 2010-2016, Christian Johansen
- 2013, Thorsten Lorenz.
 License: Expat
 
 License: Apache-2.0

@@ -1,0 +1,16 @@
+Description: don't try to access to __proto__
+Author: Yadd <yadd@debian.org>
+Forwarded: no
+Last-Update: 2023-04-03
+
+--- a/lib/sinon/util/core/walk.js
++++ b/lib/sinon/util/core/walk.js
+@@ -17,7 +17,7 @@
+     }
+ 
+     forEach(Object.getOwnPropertyNames(obj), function (k) {
+-        if (seen[k] !== true) {
++        if (k !== '__proto__' && seen[k] !== true) {
+             seen[k] = true;
+             var target =
+                 typeof Object.getOwnPropertyDescriptor(obj, k).get ===

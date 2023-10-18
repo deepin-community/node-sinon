@@ -1,18 +1,127 @@
 # Changes
 
+## 14.0.2
+
+- [`4d70f6e0`](https://github.com/sinonjs/sinon/commit/4d70f6e0965b82e387cd632fbe54ed58a8fcf601)
+  Upgrade nise to latest (Morgan Roderick)
+- [`96a0d756`](https://github.com/sinonjs/sinon/commit/96a0d756b553c38154f442785c34c6092d1ac572)
+  Update @sinonjs/samsam to latest (Morgan Roderick)
+- [`babb4736`](https://github.com/sinonjs/sinon/commit/babb4736d7f0080e25dce34fc8ce72879e86792e)
+  Prefer @sinonjs/commons@2 (Morgan Roderick)
+  > That makes ES2017 support explicit
+
+_Released by Morgan Roderick on 2022-11-07._
+
+## 14.0.1
+
+- [`6c4753ef`](https://github.com/sinonjs/sinon/commit/6c4753ef243880f5cdf1ea9c88b569780f9dc013)
+  Fixed CSS selectors in `_base.scss` and changed blockquote default size to 16px. (Jose Lupianez)
+- A bunch of dependency updates
+
+_Released by [Carl-Erik Kopseng](https://github.com/fatso83) on 2022-10-03._
+
+## 14.0.0
+
+- [`c2bbd826`](https://github.com/sinonjs/sinon/commit/c2bbd82641444eb5b32822489ae40f185afbbf00)
+  Drop node 12 (Morgan Roderick)
+  > And embrace Node 18
+  >
+  > See https://nodejs.org/en/about/releases/
+
+_Released by Morgan Roderick on 2022-05-07._
+
+## 13.0.2
+
+- [`bddb631a`](https://github.com/sinonjs/sinon/commit/bddb631aab6afc3e663a5db847c675ea96c90970)
+  Update fake-timers (Carl-Erik Kopseng)
+- [`eaed0eb2`](https://github.com/sinonjs/sinon/commit/eaed0eb24bd8f42b0484b8861a5ff066001da5d5)
+  Bump nokogiri from 1.13.3 to 1.13.4 (#2451) (dependabot[bot])
+
+_Released by [Carl-Erik Kopseng](https://github.com/fatso83) on 2022-04-14._
+
+## 13.0.1
+
+- [`ec4223f9`](https://github.com/sinonjs/sinon/commit/ec4223f94076d809483e3c6a7536cfc1278dd3c9)
+  Bump nise to fix sinonjs/nise#193 (Carl-Erik Kopseng)
+- [`f329a010`](https://github.com/sinonjs/sinon/commit/f329a01040bfa5a79e039419220b21eda56935d6)
+  Add unimported to workflow (#2441) (Morgan Roderick)
+- [`7f16cec9`](https://github.com/sinonjs/sinon/commit/7f16cec968c3c8d4e580267fb00195916d6f827d)
+  Enable updates to same major version (Carl-Erik Kopseng)
+- [`f784d7ad`](https://github.com/sinonjs/sinon/commit/f784d7ad2c86be0fc65477d69f8bdafca846ef2c)
+  Re-introduce new version.sh script to version hook (Joel Bradshaw)
+  > This was inadvertently removed during merge conflicts, and is required
+  > for any of the new release process stuff to work
+- [`51c508ab`](https://github.com/sinonjs/sinon/commit/51c508ab77cf0f9fb8c5305ff626f6a2eada178f)
+  Add dry run mode to `npm version` (#2436) (Joel Bradshaw)
+  > - Add DRY_RUN flag to skip publish/push
+  >
+  > - Allow overriding branch names for testing
+- [`05341dcf`](https://github.com/sinonjs/sinon/commit/05341dcf92ddca4a1d4c90966b1fcdc7039cff18)
+  Update npm version scripts to manage new releases branch (Joel Bradshaw)
+- [`fe658261`](https://github.com/sinonjs/sinon/commit/fe65826171db69ed2986a1060db77944dbc98a6d)
+  Remove release archives from master (Joel Bradshaw)
+  > These archives made it difficult to find things in the GitHub interface,
+  > and take up a lot of space in a checked-out repo for something that is
+  > not useful to most people checking out the repository.
+  >
+  > The main purpose of these archives is to make old versions and
+  > documentation available on the Sinon website that is run out of this
+  > repo. This can be supported by using a separate branch for website
+  > releases, and to maintain the archives.
+  >
+  > Following this commit, the `npm version` scripts will be updated to
+  > automatically handle archiving the releases in the new releases branch
+  > and keeping it up to date with master.
+  >
+  > Also remove the directories we removed from .prettierignore, since they
+  > don't exist any more.
+
+_Released by [Carl-Erik Kopseng](https://github.com/fatso83) on 2022-02-01._
+
+## 13.0.0
+
+- [`cf3d6c0c`](https://github.com/sinonjs/sinon/commit/cf3d6c0cd9689c0ee673b3daa8bf9abd70304392)
+  Upgrade packages (#2431) (Carl-Erik Kopseng)
+  > - Update all @sinonjs/ packages
+  > - Upgrade to fake-timers 9
+  >
+  > - chore: ensure always using latest LTS release
+- [`41710467`](https://github.com/sinonjs/sinon/commit/417104670d575e96a1b645ea40ce763afa76fb1b)
+  Adjust deploy scripts to archive old releases in a separate branch, move existing releases out of master (#2426) (Joel Bradshaw)
+  > Co-authored-by: Carl-Erik Kopseng <carlerik@gmail.com>
+- [`c80a7266`](https://github.com/sinonjs/sinon/commit/c80a72660e89d88b08275eff1028ecb9e26fd8e9)
+  Bump node-fetch from 2.6.1 to 2.6.7 (#2430) (dependabot[bot])
+  > Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+- [`a00f14a9`](https://github.com/sinonjs/sinon/commit/a00f14a97dbe8c65afa89674e16ad73fc7d2fdc0)
+  Add explicit export for `./*` (#2413) (なつき)
+- [`b82ca7ad`](https://github.com/sinonjs/sinon/commit/b82ca7ad9b1add59007771f65a18ee34415de8ca)
+  Bump cached-path-relative from 1.0.2 to 1.1.0 (#2428) (dependabot[bot])
+- [`a9ea1427`](https://github.com/sinonjs/sinon/commit/a9ea142716c094ef3c432ecc4089f8207b8dd8b6)
+  Add documentation for assert.calledOnceWithMatch (#2424) (Mathias Schreck)
+- [`1d5ab86b`](https://github.com/sinonjs/sinon/commit/1d5ab86ba60e50dd69593ffed2bffd4b8faa0d38)
+  Be more general in stripping off stack frames to fix Firefox tests (#2425) (Joel Bradshaw)
+- [`56b06129`](https://github.com/sinonjs/sinon/commit/56b06129e223eae690265c37b1113067e2b31bdc)
+  Check call count type (#2410) (Joel Bradshaw)
+- [`7863e2df`](https://github.com/sinonjs/sinon/commit/7863e2dfdbda79e0a32e42af09e6539fc2f2b80f)
+  Fix #2414: make Sinon available on homepage (Carl-Erik Kopseng)
+- [`fabaabdd`](https://github.com/sinonjs/sinon/commit/fabaabdda82f39a7f5b75b55bd56cf77b1cd4a8f)
+  Bump nokogiri from 1.11.4 to 1.13.1 (#2423) (dependabot[bot])
+- [`dbc0fbd2`](https://github.com/sinonjs/sinon/commit/dbc0fbd263c8419fa47f9c3b20cf47890a242d21)
+  Bump shelljs from 0.8.4 to 0.8.5 (#2422) (dependabot[bot])
+- [`fb8b3d72`](https://github.com/sinonjs/sinon/commit/fb8b3d72a85dc8fb0547f859baf3f03a22a039f7)
+  Run Prettier (Carl-Erik Kopseng)
+- [`12a45939`](https://github.com/sinonjs/sinon/commit/12a45939e9b047b6d3663fe55f2eb383ec63c4e1)
+  Fix 2377: Throw error when trying to stub non-configurable or non-writable properties (#2417) (Stuart Dotson)
+  > Fixes issue #2377 by throwing an error when trying to stub non-configurable or non-writable properties
+
+_Released by [Carl-Erik Kopseng](https://github.com/fatso83) on 2022-01-28._
+
 ## 12.0.1
 
 - [`3f598221`](https://github.com/sinonjs/sinon/commit/3f598221045904681f2b3b3ba1df617ed5e230e3)
   Fix issue with npm unlink for npm version > 6 (Carl-Erik Kopseng)
-    >
-    > 'npm unlink' would implicitly unlink the current dir
-    > until version 7, which requires an argument
-    >
 - [`51417a38`](https://github.com/sinonjs/sinon/commit/51417a38111eeeb7cd14338bfb762cc2df487e1b)
   Fix bundling of cjs module (#2412) (Julian Grinblat)
-    >
-    > * Fix bundling of cjs module    >
-    > * Run prettier
 
 _Released by [Carl-Erik Kopseng](https://github.com/fatso83) on 2021-11-04._
 

@@ -1,6 +1,9 @@
 /* eslint-disable no-empty-function */
 "use strict";
 
+/* eslint-disable consistent-return */
+// This is because we need to do `return this.skip()` when feature detecting in tests
+
 /*
  * FIXME This is an interim hack to break a circular dependency between FakeTimers,
  * nise and sinon.
@@ -50,6 +53,81 @@ const utilPromisifyAvailable = promisePresent && utilPromisify;
 const timeoutResult = global.setTimeout(NOOP, 0);
 const addTimerReturnsObject = typeof timeoutResult === "object";
 
+describe("issue #2449: permanent loss of native functions", function () {
+    it("should not fake faked timers", function () {
+        const currentTime = new Date().getTime();
+        const date1 = new Date("2015-09-25");
+        const date2 = new Date("2015-09-26");
+        let clock = FakeTimers.install({ now: date1 });
+        assert.same(clock.now, date1.getTime());
+        assert.same(new Date().getTime(), 1443139200000);
+        assert.exception(function () {
+            FakeTimers.install({ now: date2 });
+        });
+        clock.uninstall();
+        clock = FakeTimers.install({ now: date2 });
+        assert.same(clock.now, date2.getTime());
+        clock.uninstall();
+        assert.greater(new Date().getTime(), currentTime, true);
+    });
+
+    it("should not fake faked timers on a custom target", function () {
+        const setTimeoutFake = sinon.fake();
+        const context = {
+            Date: Date,
+            setTimeout: setTimeoutFake,
+            clearTimeout: sinon.fake(),
+        };
+        let clock = FakeTimers.withGlobal(context).install();
+        assert.exception(function () {
+            clock = FakeTimers.withGlobal(context).install();
+        });
+        clock.uninstall();
+
+        // After uninstaling we should be able to install without issue
+        clock = FakeTimers.withGlobal(context).install();
+        clock.uninstall();
+    });
+
+    it("should not allow a fake on a custom target if the global is faked and the context inherited from the global", function () {
+        const globalClock = FakeTimers.install();
+        assert.equals(new Date().getTime(), 0);
+        const setTimeoutFake = sinon.fake();
+        const context = {
+            Date: Date,
+            setTimeout: setTimeoutFake,
+            clearTimeout: sinon.fake(),
+        };
+        assert.equals(new context.Date().getTime(), 0);
+        assert.exception(function () {
+            FakeTimers.withGlobal(context).install();
+        });
+
+        globalClock.uninstall();
+        refute.equals(new Date().getTime(), 0);
+    });
+
+    it("should allow a fake on the global if a fake on a customer target is already defined", function () {
+        const setTimeoutFake = sinon.fake();
+        const context = {
+            Date: Date,
+            setTimeout: setTimeoutFake,
+            clearTimeout: sinon.fake(),
+        };
+        const clock = FakeTimers.withGlobal(context).install();
+        assert.equals(new context.Date().getTime(), 0);
+        refute.equals(new Date().getTime(), 0);
+        const globalClock = FakeTimers.install();
+        assert.equals(new Date().getTime(), 0);
+
+        globalClock.uninstall();
+        refute.equals(new Date().getTime(), 0);
+        assert.equals(new context.Date().getTime(), 0);
+        clock.uninstall();
+        refute.equals(new Date().getTime(), 0);
+        refute.equals(new context.Date().getTime(), 0);
+    });
+});
 describe("issue #59", function () {
     it("should install and uninstall the clock on a custom target", function () {
         const setTimeoutFake = sinon.fake();
@@ -66,7 +144,6 @@ describe("issue #59", function () {
         clock.uninstall();
     });
 });
-
 describe("issue #73", function () {
     it("should install with date object", function () {
         const date = new Date("2015-09-25");
@@ -3083,7 +3160,7 @@ describe("FakeTimers", function () {
 
         it("does not remove immediate", function () {
             if (!setImmediatePresent) {
-                this.skip();
+                return this.skip();
             }
 
             const stub = sinon.stub();
@@ -3134,7 +3211,7 @@ describe("FakeTimers", function () {
 
         it("resets hrTime - issue #206", function () {
             if (!hrtimePresent) {
-                this.skip();
+                return this.skip();
             }
 
             const clock = FakeTimers.createClock();
@@ -3269,7 +3346,7 @@ describe("FakeTimers", function () {
 
         it("does not remove immediate", function () {
             if (!setImmediatePresent) {
-                this.skip();
+                return this.skip();
             }
 
             const stub = sinon.stub();
@@ -3450,8 +3527,9 @@ describe("FakeTimers", function () {
         describe("now", function () {
             it("returns clock.now", function () {
                 if (!Date.now) {
-                    this.skip();
+                    return this.skip();
                 }
+
                 /* eslint camelcase: "off" */
                 const clock_now = this.clock.Date.now();
                 const global_now = GlobalDate.now();
@@ -3461,8 +3539,9 @@ describe("FakeTimers", function () {
 
             it("is undefined", function () {
                 if (Date.now) {
-                    this.skip();
+                    return this.skip();
                 }
+
                 assert.isUndefined(this.clock.Date.now);
             });
         });
@@ -3483,17 +3562,17 @@ describe("FakeTimers", function () {
         });
 
         describe("toSource", function () {
-            it("is mirrored", function () {
+            before(function () {
                 if (!Date.toSource) {
                     this.skip();
                 }
+            });
+
+            it("is mirrored", function () {
                 assert.same(this.clock.Date.toSource(), Date.toSource());
             });
 
             it("is undefined", function () {
-                if (Date.toSource) {
-                    this.skip();
-                }
                 assert.isUndefined(this.clock.Date.toSource);
             });
         });
@@ -3603,16 +3682,16 @@ describe("FakeTimers", function () {
             }
         });
 
-        it("global fake setTimeout().refresh() should return timer", function () {
+        it("global fake setTimeout().refresh() should return same timer", function () {
             this.clock = FakeTimers.install();
             const stub = sinon.stub();
 
             if (typeof setTimeout(NOOP, 0) === "object") {
-                const to = setTimeout(stub, 1000).refresh();
-                assert.isNumber(Number(to));
-                assert.isFunction(to.ref);
-                assert.isFunction(to.refresh);
+                const timeout = setTimeout(stub, 1000);
+                const to = timeout.refresh();
+                assert(timeout === to);
             }
+            this.clock.uninstall();
         });
 
         it("replaces global clearTimeout", function () {
@@ -3706,6 +3785,27 @@ describe("FakeTimers", function () {
             });
         }
 
+        it("throws when adding performance to tofake array when performance not present", function () {
+            assert.exception(
+                function () {
+                    const setTimeoutFake = sinon.fake();
+                    const context = {
+                        Date: Date,
+                        setTimeout: setTimeoutFake,
+                        clearTimeout: sinon.fake(),
+                        performance: undefined,
+                    };
+                    FakeTimers.withGlobal(context).install({
+                        toFake: ["performance"],
+                    });
+                },
+                {
+                    name: "ReferenceError",
+                    message: "non-existent performance object cannot be faked",
+                }
+            );
+        });
+
         if (performanceNowPresent) {
             it("replaces global performance.now", function () {
                 this.clock = FakeTimers.install();
@@ -3737,6 +3837,10 @@ describe("FakeTimers", function () {
             it("should not alter the global performance properties and methods", function () {
                 // In Phantom.js environment, Performance.prototype has only "now" method.
                 // For testing, some stub functions need to be assigned.
+                if (typeof Performance === "undefined") {
+                    return this.skip();
+                }
+
                 Performance.prototype.someFunc1 = function () {};
                 Performance.prototype.someFunc2 = function () {};
                 Performance.prototype.someFunc3 = function () {};
@@ -3754,10 +3858,32 @@ describe("FakeTimers", function () {
                 delete Performance.prototype.someFunc3;
             });
 
+            it("should mock performance on Node 16+", function () {
+                // node 16+ has a performance object but not a global constructor
+                if (typeof performance === "undefined") {
+                    return this.skip();
+                }
+                if (typeof Performance !== "undefined") {
+                    return this.skip();
+                }
+
+                // does not crash
+                this.clock = FakeTimers.install();
+                this.clock.uninstall();
+            });
+
             it("should replace the getEntries, getEntriesByX methods with noops that return []", function () {
+                if (typeof Performance === "undefined") {
+                    return this.skip();
+                }
+
                 function noop() {
                     return ["foo"];
                 }
+
+                Object.defineProperty(Performance.prototype, "getEntries", {
+                    writeable: true,
+                });
 
                 Performance.prototype.getEntries = noop;
                 Performance.prototype.getEntriesByName = noop;
@@ -3920,7 +4046,7 @@ describe("FakeTimers", function () {
 
         it("should test setImmediate", function (done) {
             if (!setImmediatePresent) {
-                this.skip();
+                return this.skip();
             }
 
             const date = new Date("2015-09-25");
@@ -4029,7 +4155,7 @@ describe("FakeTimers", function () {
 
         it("can clear setImmediate", function (done) {
             if (globalObject.setImmediate === undefined) {
-                this.skip();
+                return this.skip();
             }
 
             const timer = globalObject.setImmediate(
@@ -4042,7 +4168,7 @@ describe("FakeTimers", function () {
 
         it("can clear requestAnimationFrame", function (done) {
             if (globalObject.requestAnimationFrame === undefined) {
-                this.skip();
+                return this.skip();
             }
 
             const timer = globalObject.requestAnimationFrame(
@@ -4055,7 +4181,7 @@ describe("FakeTimers", function () {
 
         it("can clear requestIdleCallback", function (done) {
             if (globalObject.requestIdleCallback === undefined) {
-                this.skip();
+                return this.skip();
             }
 
             const timer = globalObject.requestIdleCallback(
@@ -4213,7 +4339,7 @@ describe("FakeTimers", function () {
 
         it("does not remove immediate", function () {
             if (!setImmediatePresent) {
-                this.skip();
+                return this.skip();
             }
 
             const stub = sinon.stub();
@@ -4786,7 +4912,8 @@ describe("#368 - timeout.refresh setTimeout arguments", function () {
             this.skip();
         }
     });
-    it("should forward  arguments passed to setTimeout", function () {
+
+    it("should forward arguments passed to setTimeout", function () {
         const clock = FakeTimers.install();
         const stub = sinon.stub();
 
@@ -4815,13 +4942,19 @@ describe("#187 - Support timeout.refresh in node environments", function () {
         clock.uninstall();
     });
 
-    it("assigns a new id to the refreshed timer", function () {
+    it("only calls stub once if not fired at time of refresh", function () {
         const clock = FakeTimers.install();
         const stub = sinon.stub();
+
         if (typeof setTimeout(NOOP, 0) === "object") {
             const t = setTimeout(stub, 1000);
-            const t2 = t.refresh();
-            refute.same(Number(t), Number(t2));
+            clock.tick(999);
+            assert(stub.notCalled);
+            t.refresh();
+            clock.tick(999);
+            assert(stub.notCalled);
+            clock.tick(1);
+            assert(stub.calledOnce);
         }
         clock.uninstall();
     });
@@ -5085,11 +5218,13 @@ describe("loop limit stack trace", function () {
     });
 
     describe("setImmediate", function () {
-        beforeEach(function () {
+        before(function () {
             if (!setImmediatePresent) {
                 this.skip();
             }
+        });
 
+        beforeEach(function () {
             function recursiveCreateTimer() {
                 setImmediate(function recursiveCreateTimerTimeout() {
                     recursiveCreateTimer();
@@ -5184,5 +5319,58 @@ describe("loop limit stack trace", function () {
             }
             assert.equals(caughtError, true);
         });
+    });
+});
+
+describe("Node Timer: ref(), unref(),hasRef()", function () {
+    let clock;
+
+    before(function () {
+        if (!addTimerReturnsObject) {
+            this.skip();
+        }
+        clock = FakeTimers.install();
+    });
+
+    afterEach(function () {
+        clock.uninstall();
+    });
+
+    it("should return the ref status as true after initiation", function () {
+        const stub = sinon.stub();
+        const refStatusForTimeout = clock.setTimeout(stub, 0).hasRef();
+        const refStatusForInterval = clock.setInterval(stub, 0).hasRef();
+        assert.isTrue(refStatusForTimeout);
+        assert.isTrue(refStatusForInterval);
+        clock.uninstall();
+    });
+
+    it("should return the ref status as false after using unref", function () {
+        const stub = sinon.stub();
+        const refStatusForTimeout = clock.setTimeout(stub, 0).unref().hasRef();
+        const refStatusForInterval = clock
+            .setInterval(stub, 0)
+            .unref()
+            .hasRef();
+        assert.isFalse(refStatusForInterval);
+        assert.isFalse(refStatusForTimeout);
+        clock.uninstall();
+    });
+
+    it("should return the ref status as true after using unref and then ref ", function () {
+        const stub = sinon.stub();
+        const refStatusForTimeout = clock
+            .setTimeout(stub, 0)
+            .unref()
+            .ref()
+            .hasRef();
+        const refStatusForInterval = clock
+            .setInterval(stub, 0)
+            .unref()
+            .ref()
+            .hasRef();
+        assert.isTrue(refStatusForInterval);
+        assert.isTrue(refStatusForTimeout);
+        clock.uninstall();
     });
 });
