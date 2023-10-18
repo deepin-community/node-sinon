@@ -1,0 +1,16 @@
+Description: fix for path-to-regexp >= 6
+Author: Yadd <yadd@debian.org>
+Forwarded: not-needed
+Last-Update: 2022-08-26
+
+--- a/nise/lib/fake-server/index.js
++++ b/nise/lib/fake-server/index.js
+@@ -4,7 +4,7 @@
+ var push = [].push;
+ var log = require("./log");
+ var configureLogError = require("../configure-logger");
+-var pathToRegexp = require("path-to-regexp");
++var { pathToRegexp } = require("path-to-regexp");
+ 
+ var supportsArrayBuffer = typeof ArrayBuffer !== "undefined";
+ 

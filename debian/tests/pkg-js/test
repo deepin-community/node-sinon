@@ -1,1 +1,1 @@
-NODE_PATH=node_modules:debian/tests/test_modules mocha --recursive -R spec 'test/**/*-test.js'
+mocha --recursive 'test/**/*-test.js'

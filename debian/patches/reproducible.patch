@@ -1,0 +1,17 @@
+Description: make build reproducible
+Author: Yadd <yadd@debian.org>
+Forwarded: not-needed
+Reviewed-By: Yadd <yadd@debian.org>
+Last-Update: 2022-02-07
+
+--- a/build.cjs
++++ b/build.cjs
+@@ -7,7 +7,7 @@
+ var sinon = require("./lib/sinon");
+ 
+ // YYYY-MM-DD
+-var date = new Date().toISOString().split("T")[0];
++var date = new Date(process.env.SOURCE_DATE_EPOCH ? (process.env.SOURCE_DATE_EPOCH * 1000) : new Date().getTime()).toISOString().split("T")[0];
+ 
+ // Keep the preamble on one line to retain source maps
+ var preamble = `/* Sinon.JS ${pkg.version}, ${date}, @license BSD-3 */`;

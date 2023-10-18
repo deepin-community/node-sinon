@@ -1,1 +1,5 @@
 fix-sinonjsreferee-sinon-test.diff
+reproducible.patch
+fix-for-path-to-regexp-6.patch
+drop-unstable-test.patch
+dont-try-to-access-to-__proto__.patch
